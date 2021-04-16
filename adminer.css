@@ -772,6 +772,19 @@ th > code {
 	width: 100% !important;
 }
 
+
+
+/*** SCHEMA ***********************************/
+
+#schema .table {
+    background: var(--back-table);
+}
+
+#schema .table i span {
+    color: var(--accent2);
+}
+
+
 /*** TABLES ***********************************/
 
 table {
