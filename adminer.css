@@ -47,10 +47,10 @@ Icons from http://FlatIcon.com:
     --text-link: #1976D2;
     --text-link-hover: #E64A19;
 
-    --back-error: #EF9A9A;
+    --back-error: #FFCDD2;
     --back-message: #E6EE9C;
     --text-message: #1b3610;
-    --text-error: #791414;
+    --text-error: #500e0e;
     --text-time: #00000080;
 
     --back-button: var(--accent1);
@@ -58,18 +58,22 @@ Icons from http://FlatIcon.com:
     --back-button-disabled: #bdbdbd;
     --text-button: #fff;
     
-    --back-table: #ffffff80;
+    --back-panel: #ffffff80;
+
+    --back-table: #fff;
     --back-table-head: #607D8B;
-    --back-table-tint: #607D8B20;
-    --back-table-hover: #FF572260;
+    --back-table-tint: #607D8B10;
+    --back-table-hover: #FF572240;
     --back-table-high: #FF572220;
-    --back-table-high-tint: #FF572240;
+    --back-table-high-tint: #FF572230;
 
     --back-sql: #fff;
 
     --border: #90A4AE;
     --border-table: #CFD8DC;
     --border-table-head: #CFD8DC;
+
+    --shadow: #00000040;
 }
 
 /*** GENERAL ***********************************/
@@ -232,6 +236,7 @@ button:focus,
 	color: var(--text-button);
 	background: var(--back-button-high);
 	text-decoration: none;
+    box-shadow: 0 0.1rem 0.2rem var(--shadow);
 }
 
 input[type="file"]:hover::-ms-browse,
@@ -282,7 +287,7 @@ fieldset {
     padding-top: 0.3em;
 	display: inline-block;
     margin-right: 0.3rem;
-    background: var(--back-table);
+    background: var(--back-panel);
     min-height: 3em;
 }
 .rtl fieldset {
@@ -358,20 +363,18 @@ input.required {
 h1 {
 	background: var(--back-title);
 	margin-bottom: 0;
-    color: var(--text-title); 
-	position: sticky;
-	top: 0;
-	z-index: 1;
+    color: var(--text-heading); 
+    margin: 0 -20px 1em;
 	padding: 2em 20px 0.5em;
 	border-bottom-style: none;
-	color: var(--text-heading);
 	overflow-wrap: break-word;
-	margin: 0 -20px 1em;
 }
 
 #h1 {
 	color: inherit;
 	font-style: normal;
+    pointer-events: none;
+    cursor: default;
 }
 
 #h1:hover,
@@ -654,6 +657,7 @@ form > p {
 	margin: 0.7em -20px -20px;
 	padding: 0 20px	20px;
 	overflow: hidden !important;
+    font-size: 1rem;
 }
 #logins:hover,
 #tables:hover {
@@ -806,6 +810,11 @@ th {
 .rtl th {
 	border-width: 0 0 thin thin;
 }
+
+th {
+    background: inherit;
+}
+
 td a,
 th a {
 	vertical-align: inherit;
