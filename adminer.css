@@ -1,29 +1,27 @@
 /*
 A clean, simple, modern theme.
 By Steve Copley, April 2021
+Update from https://raw.githubusercontent.com/stevecopley/adminer/master/adminer.css
 
-Based on Lucs Sandery's (see below) but heavily modified:
-- Colour rationalisation
+Based on Lucas Sandery's (see below) but heavily modified:
+- Colour rationalisation and use of variables for ease
+- Move to a more subtle Material Design aesthetic
 - Removed distracting background
-- Nicer fonts
+- Nicer fonts (via Google, with decent fallbacks)
 - Lots of layout tweaks
-- Removed pointless media query
+- Removed (pointless?) media query
+- Added more icons from http://FlatIcon.com
+  - "Sort", "Four Tiles" & "Nine Tiles" by Dave Gandy
+  - "Upload" & "Download" by Pixel Perfect
+  - "Magnify Glass" by Good Ware
+  - "History" by Google
 
 ------------------------------------------------------------
 
+Based on...
 A colourful, RTL-friendly theme.
-Update from https://github.com/lucas-sandery/adminer/raw/master/designs/lucas-sandery/adminer.css
+By Lucas Sandery https://github.com/lucas-sandery/adminer
 
-Icons from http://FlatIcon.com:
-"Translation" by Freepik
-"Power" by Vectors Market
-"Database" by Madebyoliver
-"Table" by Vaadin icons
-"Plus" by Freepik
-"Up arrow" by Alfredo Hernandez
-"Down arrow" by Alfredo Hernandez
-"Forbidden Mark" by Pavel Kozlov
-"Search" by Freepik
 */
 
 
@@ -41,8 +39,8 @@ Icons from http://FlatIcon.com:
     --back-footer: #eceff1;
     --back-footer-fade: #eceff100;
 
-    --text-title: #90a4ae;
     --text-heading: #fff;
+    --text-sub-heading: #90caf9;
 
     --text-link: #1976D2;
     --text-link-hover: #E64A19;
@@ -67,7 +65,8 @@ Icons from http://FlatIcon.com:
     --back-table-high: #FF572220;
     --back-table-high-tint: #FF572230;
 
-    --back-sql: #fff;
+    --back-sql: #e3f2fd;
+    --back-editor: #fff;
 
     --border: #90A4AE;
     --border-table: #CFD8DC;
@@ -88,7 +87,7 @@ body {
 	display: flex;
 	background: var(--back-sidebar);
 	box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 p {
@@ -287,12 +286,99 @@ fieldset {
     padding-top: 0.3em;
 	display: inline-block;
     margin-right: 0.3rem;
+    margin-bottom: 0.5rem;
     background: var(--back-panel);
     min-height: 3em;
+    min-width: 4em;
+    /* text-align: center; */
 }
 .rtl fieldset {
     margin-right: 0;
     margin-left: 0.3rem;
+}
+
+.js fieldset > .hidden {
+    display: block;
+    min-width: 100%;
+    min-height: 1.5rem;
+}
+
+.js fieldset > .hidden > *,
+#import.hidden > * {
+    display: none !important;
+}
+
+a[href="#import"] {
+    display: inline-block;
+    position: relative;
+    margin-left: 1em;
+    padding: 0 0.5em;
+    background: linear-gradient( var(--back-main) 50%, var(--back-panel) 0 );
+    z-index: 2;
+    font-size: 0.9em;
+}
+
+#import {
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1;
+    position: relative;
+    top: -0.6rem;
+    width: max-content;
+    min-height: 1.8rem;
+    padding: 0.8rem 0.5rem 0.5rem;
+    background: var(--back-panel);
+    border: 1px solid var(--border);
+    color: transparent;
+}
+
+#import > * {
+    color: initial;
+}
+
+#import > input[type="submit"] {
+    color: var(--text-button);
+}
+
+#import.hidden {
+    display: block;
+    min-width: 4em;
+    color: transparent;
+}
+
+
+.js fieldset > .hidden,
+#import.hidden {
+    background-position: center;
+    background-size: 1.5rem;
+    background-repeat: no-repeat;
+}
+
+
+#fieldset-sort.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20511.6%20511.6%22%3E%3Cg%20fill%3D%22%23455a6440%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M260.5%20219.3h127.9a8.9%208.9%200%20009.1-9.1v-54.9c0-2.6-.8-4.8-2.5-6.5a8.9%208.9%200%2000-6.6-2.6h-128a8.9%208.9%200%2000-9.1%209.1v54.8c0%202.7%201%204.9%202.6%206.6a8.9%208.9%200%20006.6%202.6zM260.5%2073h73c2.8%200%205-.8%206.6-2.5a8.9%208.9%200%20002.6-6.5V9a8.9%208.9%200%2000-9.1-9.1h-73.1c-2.7%200-4.9.9-6.6%202.6a9%209%200%2000-2.5%206.5V64c0%202.6.8%204.8%202.5%206.5a9%209%200%20006.6%202.6zM196.5%20402h-54.8V9c0-2.6-.8-4.8-2.5-6.5a9%209%200%2000-6.6-2.6H77.8c-2.7%200-4.9.9-6.6%202.6A9%209%200%200068.6%209V402H13.8c-4.2%200-7%201.9-8.5%205.7-1.6%203.6-.9%207%202%2010L98.5%20509c2.1%201.7%204.3%202.5%206.6%202.5%202.5%200%204.6-.8%206.5-2.5l91.1-91.1c2-2.3%202.9-4.6%202.9-6.9a9%209%200%2000-2.6-6.5%209%209%200%2000-6.6-2.6zM504.6%20441.1a8.9%208.9%200%2000-6.6-2.6H260.5c-2.7%200-4.9.9-6.6%202.6a8.9%208.9%200%2000-2.5%206.6v54.8c0%202.7.8%204.8%202.5%206.6a8.9%208.9%200%20006.6%202.5H498c2.7%200%204.9-.8%206.6-2.5a8.9%208.9%200%20002.6-6.6v-54.8c0-2.7-.9-4.9-2.6-6.6zM260.5%20365.4h182.7a9%209%200%20006.6-2.5%208.9%208.9%200%20002.6-6.6v-54.8c0-2.7-.9-4.9-2.6-6.6a9%209%200%2000-6.6-2.5H260.5c-2.7%200-4.9.8-6.6%202.5a8.9%208.9%200%2000-2.5%206.6v54.8c0%202.7.8%204.9%202.5%206.6a8.9%208.9%200%20006.6%202.5z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+#fieldset-search.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20136%20136.2%22%3E%3Cpath%20d%3D%22M93.1%2080.8a51.2%2051.2%200%2010-15.7%2014.5l37.8%2037.6a10.7%2010.7%200%201015.1-15.2zm-41.8%203.5a33%2033%200%20110-66%2033%2033%200%20010%2066zm0%200%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fsvg%3E");
+}
+#fieldset-select.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Cg%20fill%3D%22%23455a6440%22%3E%3Cpath%20d%3D%22M301%20347h-91c-7%200-14%203-19%208-6%206-8%2012-8%2020v54c0%208%202%2014%208%2020%205%205%2012%208%2019%208h91c8%200%2015-3%2020-8%205-6%208-12%208-20v-54a27%2027%200%2000-27-27zM119%20347H27c-7%200-14%203-19%208-5%206-8%2012-8%2020v54c0%208%203%2014%208%2020%205%205%2012%208%2019%208h92c7%200%2014-3%2019-8%206-6%208-12%208-20v-54c0-8-2-14-8-20s-12-8-19-8zM119%2055H27c-7%200-14%202-19%208-5%205-8%2012-8%2019v55c0%208%203%2014%208%2019%205%206%2012%208%2019%208h92c7%200%2014-2%2019-8s8-11%208-19V82c0-7-2-14-8-19-5-6-12-8-19-8zM301%20201h-91a27%2027%200%2000-27%2027v55c0%208%202%2014%208%2020%205%205%2012%208%2019%208h91c8%200%2015-3%2020-8%205-6%208-12%208-20v-55a27%2027%200%2000-27-27zM119%20201H27c-7%200-14%203-19%208s-8%2012-8%2019v55c0%208%203%2014%208%2020%205%205%2012%208%2019%208h92c7%200%2014-3%2019-8%206-6%208-12%208-20v-55c0-7-2-14-8-19s-12-8-19-8zM504%2063c-6-6-12-8-20-8h-91c-8%200-14%202-20%208-5%205-8%2012-8%2019v55c0%208%203%2014%208%2019%206%206%2012%208%2020%208h91c8%200%2014-2%2020-8s8-11%208-19V82c0-7-3-14-8-19zM301%2055h-91c-7%200-14%202-19%208s-8%2012-8%2019v55c0%208%202%2014%208%2019%205%206%2012%208%2019%208h91c8%200%2015-2%2020-8%205-5%208-11%208-19V82c0-7-3-14-8-19-5-6-12-8-20-8zM484%20201h-91c-8%200-14%203-20%208-5%205-8%2012-8%2019v55c0%208%203%2014%208%2020%206%205%2012%208%2020%208h91c8%200%2014-3%2020-8%205-6%208-12%208-20v-55c0-7-3-14-8-19-6-5-12-8-20-8zM484%20347h-91c-8%200-14%203-20%208-5%206-8%2012-8%2020v54c0%208%203%2014%208%2020%206%205%2012%208%2020%208h91c8%200%2014-3%2020-8%205-6%208-12%208-20v-54a27%2027%200%2000-27-27z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+#fieldset-partition.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20475%20475%22%3E%3Cg%3E%3Cpath%20d%3D%22M183%2037H37c-10%200-19%203-26%2010C4%2055%200%2063%200%2073v110c0%2010%204%2018%2011%2025%207%208%2016%2011%2026%2011h146c10%200%2018-3%2025-11%208-7%2011-15%2011-25V73c0-10-3-18-11-26-7-7-15-10-25-10zM183%20256H37c-10%200-19%203-26%2011-7%207-11%2015-11%2025v110c0%2010%204%2018%2011%2026%207%207%2016%2011%2026%2011h146c10%200%2018-4%2025-11%208-8%2011-16%2011-26V292c0-10-3-18-11-25-7-8-15-11-25-11zM464%2047c-7-7-16-10-25-10H292c-10%200-18%203-25%2010-8%208-11%2016-11%2026v110c0%2010%203%2018%2011%2025%207%208%2015%2011%2025%2011h147c9%200%2018-3%2025-11%207-7%2011-15%2011-25V73c0-10-4-18-11-26zM439%20256H292c-10%200-18%203-25%2011-8%207-11%2015-11%2025v110c0%2010%203%2018%2011%2026%207%207%2015%2011%2025%2011h147c9%200%2018-4%2025-11%207-8%2011-16%2011-26V292c0-10-4-18-11-25-7-8-16-11-25-11z%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+#fieldset-export.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Cpath%20d%3D%22M348.3%20101.6l-80-96c-6-7.3-18.5-7.3-24.6%200l-80%2096A16%2016%200%2000176%20128h48v240a16%2016%200%200016%2016h32a16%2016%200%200016-16v-240h48a16%2016%200%200012.3-26.3z%22%20fill%3D%22%23455a6440%22%20data-original%3D%22%23000000%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E%3Cpath%20d%3D%22M480%20191.9H320v64h128v192H64v-192h128v-64H32a32%2032%200%2000-32%2032v256a32%2032%200%200032%2032h448a32%2032%200%200032-32v-256a32%2032%200%2000-32-32z%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fsvg%3E");
+}
+#fieldset-history.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20448%20448%22%3E%3Cg%3E%3Cpath%20fill%3D%22%23455a6440%22%20d%3D%22M235%20139v106l91%2055%2015-26-74-45v-90z%22%2F%3E%3Cpath%20d%3D%22M256%2032C150%2032%2064%20118%2064%20224H0l83%2083%202%203%2086-86h-64a149%20149%200%201144%20105l-31%2031A192%20192%200%2010256%2032z%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+#import.hidden {
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Cpath%20d%3D%22M350.5%20281.4a16%2016%200%2000-14.5-9.2h-48v-240a16%2016%200%2000-16-16h-32a16%2016%200%2000-16%2016v240h-48a16%2016%200%2000-12.3%2026.2l80%2096a16.6%2016.6%200%200024.6%200l80-96a16%2016%200%20002.2-17z%22%20fill%3D%22%23455a6440%22%20data-original%3D%22%23000000%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E%3Cpath%20d%3D%22M480%20175.8H320v64h128v192H64v-192h128v-64H32a32%2032%200%2000-32%2032v256a32%2032%200%200032%2032h448a32%2032%200%200032-32v-256a32%2032%200%2000-32-32z%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fsvg%3E");
+}
+
+#fieldset-history code.jush-sql {
+    margin-bottom: 0.5rem;
 }
 
 #fieldset-sort > div,
@@ -361,13 +447,18 @@ input.required {
 /*** TITLE ***********************************/
 
 h1 {
+    font-size: 1.5rem;
 	background: var(--back-title);
-	margin-bottom: 0;
-    color: var(--text-heading); 
-    margin: 0 -20px 1em;
-	padding: 2em 20px 0.5em;
+	color: var(--text-heading); 
+    margin: 0 0 1em -20px;
+	padding: 2em 20px 0.5em 4rem;
 	border-bottom-style: none;
 	overflow-wrap: break-word;
+    background-position: 20px 2.5rem;
+    background-size: 2.5rem;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%22550%22%20height%3D%22460%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath%20id%3D%22b%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2FclipPath%3E%3Cpath%20id%3D%22a%22%20d%3D%22M0%200h550v460H0z%22%2F%3E%3C%2Fdefs%3E%3Cg%20clip-path%3D%22url%28%23b%29%22%3E%3Cuse%20xlink%3Ahref%3D%22%23a%22%20fill%3D%22%232196F3%22%20fill-opacity%3D%220%22%2F%3E%3Cg%20fill-rule%3D%22evenodd%22%3E%3Cpath%20d%3D%22M310%20141c-7-28-59-55-149-55-91%200-143%2027-150%2055l-1%203v250l3%206c12%2026%2063%2049%20148%2049%2084%200%20135-23%20147-49%202-1%203-4%203-6V144l-1-3zm-15%20166c0%2021-55%2045-134%2045-80%200-135-24-135-45v-52c22%2018%2068%2033%20135%2033%2066%200%20112-15%20134-33v52zm0-80c0%2021-55%2045-134%2045-80%200-135-24-135-45v-52c22%2018%2068%2033%20135%2033%2066%200%20112-15%20134-33v52zM161%20102c79%200%20134%2024%20134%2045%200%2022-55%2045-134%2045-80%200-135-23-135-45%200-21%2055-45%20135-45zm0%20332c-80%200-135-24-135-46v-54c22%2019%2068%2034%20135%2034%2066%200%20112-15%20134-34v54c0%2022-55%2046-134%2046z%22%20fill%3D%22%232196F3%22%2F%3E%3Cg%20fill%3D%22%23FF5722%22%3E%3Cpath%20d%3D%22M401%20163l-71-59%2071-60%2017%2016-52%2043%2052%2044-17%2016zM540%2058c0%206-1%2011-3%2016-1%204-4%208-7%2012l-12%208c-5%202-10%204-16%204l-1%2020h-22l-2-39h15l9-2c3-1%205-2%206-4l4-6a22%2022%200%2000-1-16l-7-8-12-5-17-2h-6V12h7c11%200%2021%201%2029%204%208%202%2014%206%2020%2010%205%204%209%209%2012%2015%203%205%204%2011%204%2017zm-33%2089l-1%206-4%205a17%2017%200%2001-12%205%2017%2017%200%2001-16-10l-1-6%201-7a18%2018%200%20019-9l7-1a17%2017%200%200116%2010l1%207z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+
 }
 
 #h1 {
@@ -383,7 +474,7 @@ h1 {
 }
 
 .version {
-	color: var(--text-title);
+	color: var(--text-sub-heading);
 	white-space: nowrap;
 }
 
@@ -391,10 +482,11 @@ h1 {
 /*** TOP HEADER ***********************************/
 
 h2 {
+    font-size: 2rem;
 	position: sticky;
 	top: 0;
 	z-index: 1;
-	padding: 2em 20px 0.5em;
+	padding: 1.5em 20px 0.4em;
 	border-bottom-style: none;
 	color: var(--text-heading);
 	overflow-wrap: break-word;
@@ -425,7 +517,7 @@ h2 + .hidden + * > :first-child {
 	z-index: 2;
 	white-space: normal;
 	background: var(--back-breadcrumb);
-	color: var(--text-heading);
+	color: var(--text-sub-heading);
 	padding: 0.1em 2.5em 0.1em 20px;
 	height: auto;
 	margin: 0 -20px -2em;
@@ -442,7 +534,7 @@ h2 + .hidden + * > :first-child {
 
 #breadcrumb a,
 #breadcrumb a:visited {
-	color: inherit;
+	color: var(--text-button);
 }
 
 
@@ -594,7 +686,7 @@ form > p {
 
 #menu form p {
     display: flex;
-    gap: 0.3rem;
+    gap: 0.4rem;
 }
 
 /*** DB MENU ***/
@@ -716,6 +808,7 @@ form > p {
 #tables a.structure:focus,
 #tables a.structure.active {
 	background-color: var(--back-button-high);
+    text-decoration: none;
 }
 
 #tables a.select.active ~ .structure {
@@ -748,7 +841,7 @@ code,
 .sqlarea,
 .jush-sql {
     font-size: 0.9rem;
-    font-family: 'Fira Mono', monospace;
+    font-family: 'Fira Mono', 'Andale Mono', monospace;
 }
 
 code.jush-sql {
@@ -758,7 +851,8 @@ code.jush-sql {
 	-o-box-decoration-break: clone;
 	box-decoration-break: clone;
     background: var(--back-sql);
-    border: 1px solid var(--border);
+    border: 1px solid var(--accent1);
+    border-width: 1px 1px 1px 8px;
 }
 
 code.jush-sqlset,
@@ -771,7 +865,7 @@ th > code {
 }
 
 .sqlarea {
-	background: var(--back-sql);
+	background: var(--back-editor);
 	border: thin solid var(--border) !important;
 	width: 100% !important;
 }
@@ -962,15 +1056,14 @@ tbody tr:nth-child(n):hover th,
 }
 
 .footer {
+    display: block;
 	margin: 0;
 	padding-top: 1em;
+    padding-bottom: 0.5rem;
     width: 100%;
 	border-style: none;
-	-webkit-mask-image: linear-gradient(rgba(255, 255, 255, 0), #fff 1em);
-	mask-image: linear-gradient(rgba(255, 255, 255, 0), #fff 1em);
-}
-
-.footer {
+	-webkit-mask-image: linear-gradient(var(--back-footer-fade), var(--back-footer) 1em);
+	mask-image: linear-gradient(var(--back-footer-fade), var(--back-footer)  1em);
     background: var(--back-main);
 }
 
@@ -997,7 +1090,7 @@ tbody tr:nth-child(n):hover th,
 }
 
 .footer ~ div {
-	margin-top: 0.8em;
+	margin-top: 0.2em;
 }
 
 .footer p {
