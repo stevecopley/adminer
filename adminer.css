@@ -290,7 +290,7 @@ fieldset {
     background: var(--back-panel);
     min-height: 3em;
     min-width: 4em;
-    /* text-align: center; */
+    text-align: center;
 }
 .rtl fieldset {
     margin-right: 0;
@@ -375,6 +375,10 @@ a[href="#import"] {
 }
 #import.hidden {
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Cpath%20d%3D%22M350.5%20281.4a16%2016%200%2000-14.5-9.2h-48v-240a16%2016%200%2000-16-16h-32a16%2016%200%2000-16%2016v240h-48a16%2016%200%2000-12.3%2026.2l80%2096a16.6%2016.6%200%200024.6%200l80-96a16%2016%200%20002.2-17z%22%20fill%3D%22%23455a6440%22%20data-original%3D%22%23000000%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%2F%3E%3Cpath%20d%3D%22M480%20175.8H320v64h128v192H64v-192h128v-64H32a32%2032%200%2000-32%2032v256a32%2032%200%200032%2032h448a32%2032%200%200032-32v-256a32%2032%200%2000-32-32z%22%20fill%3D%22%23455a6440%22%2F%3E%3C%2Fsvg%3E");
+}
+
+#fieldset-history {
+    text-align: left;
 }
 
 #fieldset-history code.jush-sql {
@@ -1095,5 +1099,6 @@ tbody tr:nth-child(n):hover th,
 
 .footer p {
     width: 100%;
+    font-size: 0.9em;
 }
 
